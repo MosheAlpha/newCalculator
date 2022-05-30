@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Hello, world!</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="" />
+    <script src="jquery.min.js"></script>
+    <script src="main-calculator.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container ">
+
+
+        <!-- Main Tamhil Buttons -->
+        <div class="row calc-header">
+            <div class="tamhils-row calc-tamhil">
+                <div class="tamhil-item">
+                    <div class="tamhil-name active" onclick="new_changeTamhil('t1');">תמהיל 1</div>
+                </div>
+                <div class="tamhil-item">
+                    <div class="tamhil-name" onclick="new_changeTamhil('t2');">תמהיל 2</div>
+                </div>
+                <div class="tamhil-item">
+                    <div class="tamhil-name" onclick="new_changeTamhil('t3');">תמהיל 3</div>
+                </div>
+                <div class="tamhil-item">
+                    <div class="tamhil-name" onclick="new_changeTamhil('t4');">תמהיל 4</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loans of all Tamhils -->
+        <div id="calc-t1"></div>
+        <div id="calc-t2"></div>
+        <div id="calc-t3"></div>
+        <div id="calc-t4"></div>
+
+        <!-- Calc-total-1 -->
+        <div id="calc-total-t1" class=" calc-total calc-total-new">
+            <div class="template-tamhil-total-results">
+                <h1>סיכום תמהיל מספר 1</h1>
+                <table cellspacing="0" cellpadding="0" border="0" width="100%" class="text-center">
+                    <thead>
+                        <tr>
+                            <th>סה״כ הלוואה</th>
+                            <th>החזר התחלתי</th>
+                            <th>החזר בסוף תקופה</th>
+                            <th>יחס החזר</th>
+                            <th>סה״כ ריבית</th>
+                            <th>סה״כ הצמדה</th>
+                            <th>ריבית + הצמדה</th>
+                        </tr>
+                    </thead>
+                    <tbody id="calc-total-t1-table">
+                        <tr>
+                            <td><b><span id="t1-total-loans-keren">0</span> </b></td>
+                            <td><b><span id="t1-total-loans-return">0</span> </b></td>
+                            <td><b><span id="t1-total-loans-return-end">0</span> </b></td>
+                            <td><b><span id="t1-total-loans-ratio">0</span> </b></td>
+                            <td><b><span id="t1-total-loans-only-intrest">0</span> </b></td>
+                            <td><b><span id="t1-total-loans-only-madad">0</span> </b></td>
+                            <td><b><span id="t1-total-loans-intrest">0</span> </b></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <br>
+            <button class="showTamhilTable" onclick="tamhilim[0].showTamhilTable(1)" id="t1-tamhil-button">הצג לוח
+                סילוקין
+                כולל</button>
+            <div class="calc-row-board" id="calc-row-board-1" style="width: 120rem;">
+                <div>
+                    <h3 class="text-center" style="color: #0a589d;">לוח סילוקין לתמהיל מספר 1</h3>
+                    <table cellspacing="0" cellpadding="5" border="0">
+                        <thead>
+                            <tr class="mortage_table_header">
+                                <th>חודש</th>
+                                <th>יתרת קרן</th>
+                                <th>החזר ע"ח קרן</th>
+                                <th>החזר ע"ח ריבית</th>
+                                <th>סה"כ החזר התחלתי</th>
+                            </tr>
+                        </thead>
+                        <tbody id="calc-total-board-t1-inner" class="tableBox">
+                            <tr>
+                                <td>1</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="result-by-month">
+                <div class="result-by-month-block" style="background: #d5ebf5;">
+                    <div>
+                        <h3 class="title">צפיה בהחזרים לאורך זמן</h3>
+                    </div>
+                    <div class="month-box-checker" style="display: flex; justify-content: space-between;">
+                        <div id="calc-single-month">
+                            <h3>צפיה מהירה בחודש
+                                ספציפי לכלל התמהיל</h3>
+                            <input type="text" id="t1-calc-single-month" placeholder="בחר חודש"
+                                oninput="tamhilim[0].singleMonth(this.value);" style="width:150px;">
+                            <div>
+                                החזר התחלתי: <b><span id="t1-calc-single-month-return">0</span> ש"ח</b>
+                            </div>
+
+                            <div>
+                                יתרת קרן: <b><span id="t1-calc-single-month-keren">0</span> ש"ח</b>
+                            </div>
+                        </div>
+
+                        <div class="chartjs-tamhil-graph">
+                            <div class="" style="width: 66rem; margin-left: 4rem;">
+                                <canvas id="t1-chart-1"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+
+        </div>
+
+        <!-- Calc-total-2 -->
+        <div id="calc-total-t2" class=" calc-total calc-total-new">
+            <div class="template-tamhil-total-results">
+                <h1>סיכום תמהיל מספר 2</h1>
+                <table cellspacing="0" cellpadding="0" border="0" width="100%" class="text-center">
+                    <thead>
+                        <tr>
+                            <th>סה״כ הלוואה</th>
+                            <th>החזר התחלתי</th>
+                            <th>החזר בסוף תקופה</th>
+                            <th>יחס החזר</th>
+                            <th>סה״כ ריבית</th>
+                            <th>סה״כ הצמדה</th>
+                            <th>ריבית + הצמדה</th>
+                        </tr>
+                    </thead>
+                    <tbody id="calc-total-t2-table">
+                        <tr>
+                            <td><b><span id="t2-total-loans-keren">0</span> </b></td>
+                            <td><b><span id="t2-total-loans-return">0</span> </b></td>
+                            <td><b><span id="t2-total-loans-return-end">0</span> </b></td>
+                            <td><b><span id="t2-total-loans-ratio">0</span> </b></td>
+                            <td><b><span id="t2-total-loans-only-intrest">0</span> </b></td>
+                            <td><b><span id="t2-total-loans-only-madad">0</span> </b></td>
+                            <td><b><span id="t2-total-loans-intrest">0</span> </b></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <br>
+            <button class="showTamhilTable" onclick="tamhilim[1].showTamhilTable(2)" id="t2-tamhil-button">הצג לוח
+                סילוקין
+                כולל</button>
+            <div class="calc-row-board" id="calc-row-board-2" style="width: 120rem;">
+                <div>
+                    <h3 class="text-center" style="color: #0a589d;">לוח סילוקין לתמהיל מספר 2</h3>
+                    <table cellspacing="0" cellpadding="5" border="0">
+                        <thead>
+                            <tr class="mortage_table_header">
+                                <th>חודש</th>
+                                <th>יתרת קרן</th>
+                                <th>החזר ע"ח קרן</th>
+                                <th>החזר ע"ח ריבית</th>
+                                <th>סה"כ החזר התחלתי</th>
+                            </tr>
+                        </thead>
+                        <tbody id="calc-total-board-t2-inner" class="tableBox">
+                            <tr>
+                                <td>1</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="result-by-month">
+                <div class="result-by-month-block" style="background: #d5ebf5;">
+                    <div>
+                        <h3 class="title">צפיה בהחזרים לאורך זמן</h3>
+                    </div>
+                    <div class="month-box-checker" style="display: flex; justify-content: space-between;">
+                        <div id="calc-single-month">
+                            <h3>צפיה מהירה בחודש
+                                ספציפי לכלל התמהיל</h3>
+                            <input type="text" id="t2-calc-single-month" placeholder="בחר חודש"
+                                oninput="tamhilim[1].singleMonth(this.value);" style="width:150px;">
+                            <div>
+                                החזר התחלתי: <b><span id="t2-calc-single-month-return">0</span> ש"ח</b>
+                            </div>
+
+                            <div>
+                                יתרת קרן: <b><span id="t2-calc-single-month-keren">0</span> ש"ח</b>
+                            </div>
+                        </div>
+
+                        <div class="chartjs-tamhil-graph">
+                            <div class="" style="width: 66rem; margin-left: 4rem;">
+                                <canvas id="t2-chart-1"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+
+
+        </div>
+
+        <!-- Calc-total-3 -->
+        <div id="calc-total-t3" class=" calc-total calc-total-new">
+            <div class="template-tamhil-total-results">
+                <h1>סיכום תמהיל מספר 3</h1>
+                <table cellspacing="0" cellpadding="0" border="0" width="100%" class="text-center">
+                    <thead>
+                        <tr>
+                            <th>סה״כ הלוואה</th>
+                            <th>החזר התחלתי</th>
+                            <th>החזר בסוף תקופה</th>
+                            <th>יחס החזר</th>
+                            <th>סה״כ ריבית</th>
+                            <th>סה״כ הצמדה</th>
+                            <th>ריבית + הצמדה</th>
+                        </tr>
+                    </thead>
+                    <tbody id="calc-total-t3-table">
+                        <tr>
+                            <td><b><span id="t3-total-loans-keren">0</span> </b></td>
+                            <td><b><span id="t3-total-loans-return">0</span> </b></td>
+                            <td><b><span id="t3-total-loans-return-end">0</span> </b></td>
+                            <td><b><span id="t3-total-loans-ratio">0</span> </b></td>
+                            <td><b><span id="t3-total-loans-only-intrest">0</span> </b></td>
+                            <td><b><span id="t3-total-loans-only-madad">0</span> </b></td>
+                            <td><b><span id="t3-total-loans-intrest">0</span> </b></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <br>
+            <button class="showTamhilTable" onclick="tamhilim[2].showTamhilTable(3)" id="t3-tamhil-button">הצג לוח
+                סילוקין
+                כולל</button>
+
+            <div class="calc-row-board" id="calc-row-board-3" style="width: 120rem;">
+                <div>
+                    <h3 class="text-center" style="color: #0a589d;">לוח סילוקין לתמהיל מספר 3</h3>
+                    <table cellspacing="0" cellpadding="5" border="0">
+                        <thead>
+                            <tr class="mortage_table_header">
+                                <th>חודש</th>
+                                <th>יתרת קרן</th>
+                                <th>החזר ע"ח קרן</th>
+                                <th>החזר ע"ח ריבית</th>
+                                <th>סה"כ החזר התחלתי</th>
+                            </tr>
+                        </thead>
+                        <tbody id="calc-total-board-t3-inner" class="tableBox">
+                            <tr>
+                                <td>1</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="result-by-month">
+                <div class="result-by-month-block" style="background: #d5ebf5;">
+                    <div>
+                        <h3 class="title">צפיה בהחזרים לאורך זמן</h3>
+                    </div>
+                    <div class="month-box-checker" style="display: flex; justify-content: space-between;">
+                        <div id="calc-single-month">
+                            <h3>צפיה מהירה בחודש
+                                ספציפי לכלל התמהיל</h3>
+                            <input type="text" id="t3-calc-single-month" placeholder="בחר חודש"
+                                oninput="tamhilim[2].singleMonth(this.value);" style="width:150px;">
+                            <div>
+                                החזר התחלתי: <b><span id="t3-calc-single-month-return">0</span> ש"ח</b>
+                            </div>
+
+                            <div>
+                                יתרת קרן: <b><span id="t3-calc-single-month-keren">0</span> ש"ח</b>
+                            </div>
+                        </div>
+
+                        <div class="chartjs-tamhil-graph">
+                            <div class="" style="width: 66rem; margin-left: 4rem;">
+                                <canvas id="t3-chart-1"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+
+
+        </div>
+
+        <!-- Calc-total-4 -->
+        <div id="calc-total-t4" class=" calc-total calc-total-new" style="display: block;">
+            <div class="template-tamhil-total-results">
+                <h1>סיכום תמהיל מספר 4</h1>
+                <table cellspacing="0" cellpadding="0" border="0" width="100%" class="text-center">
+                    <thead>
+                        <tr>
+                            <th>סה״כ הלוואה</th>
+                            <th>החזר התחלתי</th>
+                            <th>החזר בסוף תקופה</th>
+                            <th>יחס החזר</th>
+                            <th>סה״כ ריבית</th>
+                            <th>סה״כ הצמדה</th>
+                            <th>ריבית + הצמדה</th>
+                        </tr>
+                    </thead>
+                    <tbody id="calc-total-t4-table">
+                        <tr>
+                            <td><b><span id="t4-total-loans-keren">0</span> </b></td>
+                            <td><b><span id="t4-total-loans-return">0</span> </b></td>
+                            <td><b><span id="t4-total-loans-return-end">0</span> </b></td>
+                            <td><b><span id="t4-total-loans-ratio">0</span> </b></td>
+                            <td><b><span id="t4-total-loans-only-intrest">0</span> </b></td>
+                            <td><b><span id="t4-total-loans-only-madad">0</span> </b></td>
+                            <td><b><span id="t4-total-loans-intrest">0</span> </b></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <br>
+            <button class="showTamhilTable" onclick="tamhilim[3].showTamhilTable(4)" id="t4-tamhil-button">הצג לוח
+                סילוקין
+                כולל</button>
+
+            <div class="calc-row-board" id="calc-row-board-4" style="width: 120rem;">
+                <div>
+                    <h3 class="text-center" style="color: #0a589d;">לוח סילוקין לתמהיל מספר 4</h3>
+                    <table cellspacing="0" cellpadding="5" border="0">
+                        <thead>
+                            <tr class="mortage_table_header">
+                                <th>חודש</th>
+                                <th>יתרת קרן</th>
+                                <th>החזר ע"ח קרן</th>
+                                <th>החזר ע"ח ריבית</th>
+                                <th>סה"כ החזר התחלתי</th>
+                            </tr>
+                        </thead>
+                        <tbody id="calc-total-board-t4-inner" class="tableBox">
+                            <tr>
+                                <td>1</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="result-by-month">
+                <div class="result-by-month-block" style="background: #d5ebf5;">
+                    <div>
+                        <h3 class="title">צפיה בהחזרים לאורך זמן</h3>
+                    </div>
+                    <div class="month-box-checker" style="display: flex; justify-content: space-between;">
+                        <div id="calc-single-month">
+                            <h3>צפיה מהירה בחודש
+                                ספציפי לכלל התמהיל</h3>
+                            <input type="text" id="t4-calc-single-month" placeholder="בחר חודש"
+                                oninput="tamhilim[3].singleMonth(this.value);" style="width:150px;">
+                            <div>
+                                החזר התחלתי: <b><span id="t4-calc-single-month-return">0</span> ש"ח</b>
+                            </div>
+
+                            <div>
+                                יתרת קרן: <b><span id="t4-calc-single-month-keren">0</span> ש"ח</b>
+                            </div>
+                        </div>
+
+                        <div class="chartjs-tamhil-graph">
+                            <div class="" style="width: 66rem; margin-left: 4rem;">
+                                <canvas id="t4-chart-1"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+
+
+        </div>
+
+        <!-- עמודות שמסכמות עבור כל תמהיל -->
+        <div class="row">
+            <h1>השוואה בין התמהילים</h1>
+            <div class="tittle-row-tamhilim">
+                <div class="item"></div>
+                <div class="item">תמהיל 1</div>
+                <div class="item">תמהיל 2</div>
+                <div class="item">תמהיל 3</div>
+                <div class="item">תמהיל 4</div>
+            </div>
+            <div class="tamhil-all-tables">
+                <div class="tamhil-all-tittles">
+                    <div class="name">סה״כ הלוואה</div>
+                    <div class="name">החזר התחלתי</div>
+                    <div class="name">ה׳ בסוף תקופה</div>
+                    <div class="name">יחס החזר</div>
+                    <div class="name">סה״כ ריבית</div>
+                    <div class="name">סה״כ הצמדה</div>
+                    <div class="name">ריבית + הצמדה</div>
+                </div>
+                <div class="tamhil-content" id="tamhil-content-t1">
+                    <div class="row">
+                        <div class="tamhil-content-data tamhil-content-data-t1-1">0</div>
+                    </div>
+                    <div class="row">
+                        <div class="tamhil-content-data tamhil-content-data-t1-2">0</div>
+                    </div>
+                    <div class="row">
+                        <div class="tamhil-content-data tamhil-content-data-t1-3">0</div>
+                    </div>
+                    <div class="row">
+                        <div class="tamhil-content-data tamhil-content-data-t1-4">0</div>
+                    </div>
+                    <div class="row">
+                        <div class="tamhil-content-data tamhil-content-data-t1-5">0</div>
+                    </div>
+                    <div class="row">
+                        <div class="tamhil-content-data tamhil-content-data-t1-6">0</div>
+                    </div>
+                    <div class="row">
+                        <div class="tamhil-content-data tamhil-content-data-t1-7">0</div>
+                    </div>
+                </div>
+                <div class="tamhil-content" id="tamhil-content-t2">
+                    <div class="row">
+                        <div class="tamhil-content-data tamhil-content-data-t2-1">0</div>
+                    </div>
+                    <div class="row">
+                        <div class="tamhil-content-data tamhil-content-data-t2-2">0</div>
+                    </div>
+                    <div class="row">
+                        <div class="tamhil-content-data tamhil-content-data-t2-3">0</div>
+                    </div>
+                    <div class="row">
+                        <div class="tamhil-content-data tamhil-content-data-t2-4">0</div>
+                    </div>
+                    <div class="row">
+                        <div class="tamhil-content-data tamhil-content-data-t2-5">0</div>
+                    </div>
+                    <div class="row">
+                        <div class="tamhil-content-data tamhil-content-data-t2-6">0</div>
+                    </div>
+                    <div class="row">
+                        <div class="tamhil-content-data tamhil-content-data-t2-7">0</div>
+                    </div>
+                </div>
+                <div class="tamhil-content" id="tamhil-content-t3">
+                    <div class="row">
+                        <div class="tamhil-content-data tamhil-content-data-t3-1">0</div>
+                    </div>
+                    <div class="row">
+                        <div class="tamhil-content-data tamhil-content-data-t3-2">0</div>
+                    </div>
+                    <div class="row">
+                        <div class="tamhil-content-data tamhil-content-data-t3-3">0</div>
+                    </div>
+                    <div class="row">
+                        <div class="tamhil-content-data tamhil-content-data-t3-4">0</div>
+                    </div>
+                    <div class="row">
+                        <div class="tamhil-content-data tamhil-content-data-t3-5">0</div>
+                    </div>
+                    <div class="row">
+                        <div class="tamhil-content-data tamhil-content-data-t3-6">0</div>
+                    </div>
+                    <div class="row">
+                        <div class="tamhil-content-data tamhil-content-data-t3-7">0</div>
+                    </div>
+                </div>
+                <div class="tamhil-content" id="tamhil-content-t4">
+                    <div class="row">
+                        <div class="tamhil-content-data tamhil-content-data-t4-1">0</div>
+                    </div>
+                    <div class="row">
+                        <div class="tamhil-content-data tamhil-content-data-t4-2">0</div>
+                    </div>
+                    <div class="row">
+                        <div class="tamhil-content-data tamhil-content-data-t4-3">0</div>
+                    </div>
+                    <div class="row">
+                        <div class="tamhil-content-data tamhil-content-data-t4-4">0</div>
+                    </div>
+                    <div class="row">
+                        <div class="tamhil-content-data tamhil-content-data-t4-5">0</div>
+                    </div>
+                    <div class="row">
+                        <div class="tamhil-content-data tamhil-content-data-t4-6">0</div>
+                    </div>
+                    <div class="row">
+                        <div class="tamhil-content-data tamhil-content-data-t4-7">0</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>
